@@ -1,6 +1,4 @@
-<p align="center">
-    <h1>PolarLite</h1>
-</p>
+# PolarLite
 
 The [PolarLite format](./FORMAT.md) is a lightweight format to store minecraft worlds, it's based of the [Polar format](https://github.com/hollow-cube/polar/blob/main/FORMAT.md), but with a few changes.
 
