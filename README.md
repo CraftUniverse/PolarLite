@@ -5,6 +5,8 @@ The [PolarLite format](./FORMAT.md) is a lightweight format to store minecraft w
 ### Table of Contents
 
 - [Format Changes](#format-changes)
+- [Run](#run)
+- [Compile](#compile)
 - [CLI](#cli)
 - [License](#license)
 - [Contributers](#contributers)
@@ -14,6 +16,7 @@ The [PolarLite format](./FORMAT.md) is a lightweight format to store minecraft w
 A list of changes between [Polar](https://github.com/hollow-cube/polar/blob/main/FORMAT.md) and [PolarLite](./FORMAT.md)
 
 - Made `zstd` compression a must
+  - Instead of compressing the `World`-field, it compressed the entire file
 - Changed from [`Network Buffer`](https://javadoc.minestom.net/net/minestom/server/network/NetworkBuffer.html) to [`MessagePack`](https://msgpack.org/)
 - Changed file extension from `.polar` to `.polarlite`
 - Changed `Magic Number` from `Polr` to `PolrLte`
@@ -28,6 +31,26 @@ A list of changes between [Polar](https://github.com/hollow-cube/polar/blob/main
 - Removed `Block Light` and `Sky Light`
 - Removed `Has ID` from `Block Entity`
   - `Block Entity ID` will be `null` instead
+
+## Run
+
+```bash
+go run src/main.go <arguments>
+```
+
+## Compile
+
+For Windows:
+
+```bash
+./build.bat
+```
+
+For Linux:
+
+```bash
+sh ./build.sh
+```
 
 ## CLI
 
