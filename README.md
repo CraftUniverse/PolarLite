@@ -6,7 +6,6 @@ The [PolarLite format](./FORMAT.md) is a lightweight format to store minecraft w
 
 - [Format Changes](#format-changes)
 - [Run](#run)
-- [Compile](#compile)
 - [CLI](#cli)
 - [License](#license)
 - [Contributers](#contributers)
@@ -35,21 +34,7 @@ A list of changes between [Polar](https://github.com/hollow-cube/polar/blob/main
 ## Run
 
 ```bash
-go run src/main.go <arguments>
-```
-
-## Compile
-
-For Windows:
-
-```bash
-./build.bat
-```
-
-For Linux:
-
-```bash
-sh ./build.sh
+go run cmd/polarlite/main.go <arguments>
 ```
 
 ## CLI
