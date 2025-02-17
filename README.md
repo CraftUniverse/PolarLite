@@ -1,5 +1,7 @@
 # PolarLite
 
+[![Build & Release](https://github.com/CraftUniverse/PolarLite/actions/workflows/build.yml/badge.svg)](https://github.com/CraftUniverse/PolarLite/actions/workflows/build.yml)
+
 The [PolarLite format](./FORMAT.md) is a lightweight format to store minecraft worlds, it's based of the [Polar format](https://github.com/hollow-cube/polar/blob/main/FORMAT.md), but with a few changes.
 
 ### Table of Contents
