@@ -109,10 +109,10 @@ jobs:
           body: |
             🎉 New release **${{ github.ref_name }}** is now available!
           files: |
-            polarlite-windows-amd64.exe
-            polarlite-linux-amd64
-            polarlite-linux-arm64
-            polarlite-darwin-arm64
+            dist/polarlite-windows-amd64.exe
+            dist/polarlite-linux-amd64
+            dist/polarlite-linux-arm64
+            dist/polarlite-darwin-arm64
           draft: false
           prerelease: false
         env:
