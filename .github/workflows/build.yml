@@ -62,22 +62,26 @@ jobs:
       - name: Upload latest artifacts
         uses: actions/upload-artifact@v4
         with:
-          path: ./dist/polarlite-*-darwin-arm64
+          name: polarlite-darwin-arm64
+          path: ./dist/polarlite-darwin-arm64
 
       - name: Upload latest artifacts
         uses: actions/upload-artifact@v4
         with:
-          path: ./dist/polarlite-*-linux-arm64
+          name: polarlite-linux-arm64
+          path: ./dist/polarlite-linux-arm64
 
       - name: Upload latest artifacts
         uses: actions/upload-artifact@v4
         with:
-          path: ./dist/polarlite-*-darwin-amd64
+          name: polarlite-darwin-amd64
+          path: ./dist/polarlite-darwin-amd64
 
       - name: Upload latest artifacts
         uses: actions/upload-artifact@v4
         with:
-          path: ./dist/polarlite-*-windows-amd64.exe
+          name: polarlite-windows-amd64.exe
+          path: ./dist/polarlite-windows-amd64.exe
 
   release:
     name: Create GitHub Release

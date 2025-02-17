@@ -69,7 +69,7 @@ func buildTarget(version, goos, goarch, ext, outDir string) {
 	env = append(env, "GOOS="+goos, "GOARCH="+goarch)
 
 	// Generate output filename
-	outputName := filepath.Join(outDir, fmt.Sprintf("polarlite-%s-%s-%s%s", version, goos, goarch, ext))
+	outputName := filepath.Join(outDir, fmt.Sprintf("polarlite-%s-%s%s", goos, goarch, ext))
 
 	// Run build command
 	cmd := exec.Command("go", "build", "-ldflags", "-w -X 'main.version="+version+"'", "-o", outputName, "./cmd/polarlite/main.go")
