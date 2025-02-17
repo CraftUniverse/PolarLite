@@ -11,11 +11,27 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: "1.22.5"
+
+      - name: Get version from Git
+        id: get_version
+        run: |
+          GIT_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "no-tag")
+          GIT_COMMIT=$(git rev-parse --short HEAD)
+          VERSION="${GIT_TAG}-${GIT_COMMIT}"
+
+          if [ "$GIT_TAG" = "no-tag" ]; then
+            VERSION="dev-${GIT_COMMIT}"
+          fi
+
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "🔖 Version: $VERSION"
 
       - name: Delete old artifacts
         run: |
@@ -40,10 +56,10 @@ jobs:
       - name: Run build script
         run: |
           chmod +x scripts/build
-          scripts/build
+          scripts/build "$VERSION"
 
       - name: Upload latest artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: built-binaries
+          name: built-binarie
           path: ./dist/*

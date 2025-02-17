@@ -20,11 +20,17 @@ var targets = []struct {
 }
 
 func main() {
-	// Get version from Git
-	version, err := getGitVersion()
-	if err != nil {
-		fmt.Println("⚠️  Failed to retrieve version:", err)
-		version = "dev" // Fallback version
+	// Check for version argument
+	var version string
+	if len(os.Args) > 1 {
+		version = os.Args[1]
+	} else {
+		var err error
+		version, err = getGitVersion()
+		if err != nil {
+			fmt.Println("⚠️  Failed to retrieve version:", err)
+			version = "dev"
+		}
 	}
 
 	fmt.Println("🔧 Building version:", version)
@@ -44,7 +50,7 @@ func main() {
 	fmt.Println("✅ Build completed!")
 }
 
-// Get Git version (tag or commit hash)
+// Get Git version (tag + commit hash)
 func getGitVersion() (string, error) {
 	cmd := exec.Command("git", "describe", "--tags", "--always", "--dirty")
 	out, err := cmd.Output()
@@ -63,10 +69,10 @@ func buildTarget(version, goos, goarch, ext, outDir string) {
 	env = append(env, "GOOS="+goos, "GOARCH="+goarch)
 
 	// Generate output filename
-	outputName := filepath.Join(outDir, goos, goarch, fmt.Sprintf("polarlite%s", ext))
+	outputName := filepath.Join(outDir, fmt.Sprintf("polarlite-%s-%s-%s%s", version, goos, goarch, ext))
 
 	// Run build command
-	cmd := exec.Command("go", "build", "-ldflags", "-X 'main.version="+version+"'", "-o", outputName, "./cmd/polarlite/main.go")
+	cmd := exec.Command("go", "build", "-ldflags", "-w -X 'main.version="+version+"'", "-o", outputName, "./cmd/polarlite/main.go")
 	cmd.Env = env
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
