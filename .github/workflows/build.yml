@@ -1,11 +1,14 @@
-name: Build
+name: Build & Release
 
 on:
   workflow_dispatch:
+  push:
+    tags:
+      - "*"
 
 jobs:
   build:
-    name: Build
+    name: Cross-Platform Build
     runs-on: ubuntu-latest
 
     steps:
@@ -22,12 +25,10 @@ jobs:
       - name: Get version from Git
         id: get_version
         run: |
-          GIT_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "no-tag")
-          GIT_COMMIT=$(git rev-parse --short HEAD)
-          VERSION="${GIT_TAG}-${GIT_COMMIT}"
-
-          if [ "$GIT_TAG" = "no-tag" ]; then
-            VERSION="dev-${GIT_COMMIT}"
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/}
+          else
+            VERSION="dev"
           fi
 
           echo "VERSION=$VERSION" >> $GITHUB_ENV
@@ -61,5 +62,32 @@ jobs:
       - name: Upload latest artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: built-binarie
           path: ./dist/*
+
+  release:
+    name: Create GitHub Release
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download built artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./dist
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            🎉 New release **${{ github.ref_name }}** is now available!
+          files: ./dist/*
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

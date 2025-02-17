@@ -26,7 +26,7 @@ func main() {
 		version = os.Args[1]
 	} else {
 		var err error
-		version, err = getGitVersion()
+		version, err = getGitTag()
 		if err != nil {
 			fmt.Println("⚠️  Failed to retrieve version:", err)
 			version = "dev"
@@ -50,9 +50,9 @@ func main() {
 	fmt.Println("✅ Build completed!")
 }
 
-// Get Git version (tag + commit hash)
-func getGitVersion() (string, error) {
-	cmd := exec.Command("git", "describe", "--tags", "--always", "--dirty")
+// Get latest Git tag
+func getGitTag() (string, error) {
+	cmd := exec.Command("git", "describe", "--tags", "--abbrev=0")
 	out, err := cmd.Output()
 	if err != nil {
 		return "", err
