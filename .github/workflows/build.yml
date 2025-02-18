@@ -116,7 +116,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Release File (MacOS / arm64)
-        uses: softprops/action-gh-release@v2
+        uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/polarlite-darwin-arm64
@@ -125,7 +125,7 @@ jobs:
           overwrite: true
 
       - name: Release File (Linux / arm64)
-        uses: softprops/action-gh-release@v2
+        uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/polarlite-linux-arm64
@@ -134,7 +134,7 @@ jobs:
           overwrite: true
 
       - name: Release File (Linux / amd64)
-        uses: softprops/action-gh-release@v2
+        uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/polarlite-linux-amd64
@@ -143,7 +143,7 @@ jobs:
           overwrite: true
 
       - name: Release File (Windows / amd64)
-        uses: softprops/action-gh-release@v2
+        uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/polarlite-windows-amd64.exe
