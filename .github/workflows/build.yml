@@ -123,3 +123,30 @@ jobs:
           asset_name: polarlite-darwin-arm64
           tag: ${{ github.ref_name }}
           overwrite: true
+
+      - name: Release File (Linux / arm64)
+        uses: softprops/action-gh-release@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ github.workspace }}/dist/polarlite-linux-arm64
+          asset_name: polarlite-linux-arm64
+          tag: ${{ github.ref_name }}
+          overwrite: true
+
+      - name: Release File (Linux / amd64)
+        uses: softprops/action-gh-release@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ github.workspace }}/dist/polarlite-linux-amd64
+          asset_name: polarlite-linux-amd64
+          tag: ${{ github.ref_name }}
+          overwrite: true
+
+      - name: Release File (Windows / amd64)
+        uses: softprops/action-gh-release@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ github.workspace }}/polarlite-windows-amd64.exe
+          asset_name: polarlite-windows-amd64.exe
+          tag: ${{ github.ref_name }}
+          overwrite: true
