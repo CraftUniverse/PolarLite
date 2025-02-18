@@ -1,3 +1,3 @@
-module net.craftengine.polarlite.converter
+module dev.craftengine.polarlite.converter
 
 go 1.22.5
