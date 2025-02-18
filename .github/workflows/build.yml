@@ -77,7 +77,7 @@ jobs:
       - name: Upload latest artifacts (Linux / amd64)
         uses: actions/upload-artifact@v4
         with:
-          name: polarlite-darwin-amd64
+          name: polarlite-linux-amd64
           path: ./dist/polarlite-linux-amd64
 
       - name: Upload latest artifacts (Windows / amd64)
