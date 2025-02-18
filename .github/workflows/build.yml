@@ -85,3 +85,10 @@ jobs:
         with:
           name: polarlite-windows-amd64.exe
           path: ./dist/polarlite-windows-amd64.exe
+
+      - name: Upload latest artifacts (Windows / arm64)
+        uses: actions/upload-artifact@v4
+        with:
+          name: polarlite-windows-arm64.exe
+          path: ./dist/polarlite-windows-arm64.exe
+    

@@ -13,6 +13,7 @@ var targets = []struct {
 	Arch string
 	Ext  string
 }{
+	{"windows", "arm64", ".exe"},
 	{"windows", "amd64", ".exe"},
 	{"linux", "amd64", ""},
 	{"linux", "arm64", ""},
