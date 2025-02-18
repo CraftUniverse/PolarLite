@@ -108,14 +108,18 @@ jobs:
           name: Release ${{ github.ref_name }}
           body: |
             🎉 New release **${{ github.ref_name }}** is now available!
-          files: |
-            ${{ github.workspace }}/dist/polarlite-windows-amd64.exe
-            ${{ github.workspace }}/dist/polarlite-linux-amd64
-            ${{ github.workspace }}/dist/polarlite-linux-arm64
-            ${{ github.workspace }}/dist/polarlite-darwin-arm64
           draft: false
           prerelease: false
           generate_release_notes: true
           make_latest: "true"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release File (MacOS / arm64)
+        uses: softprops/action-gh-release@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ github.workspace }}/dist/polarlite-darwin-arm64
+          asset_name: polarlite-darwin-arm64
+          tag: ${{ github.ref_name }}
+          overwrite: true
